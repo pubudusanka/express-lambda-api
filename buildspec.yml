@@ -4,14 +4,20 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
+      - echo "Installing dependencies"
       - npm install
   build:
     commands:
+      - echo "Building Lambda package"
       - zip -r lambda-package.zip ./ -x buildspec.yml
       - echo "Build completed"
   post_build:
     commands:
+      - echo "Updating Lambda function code"
       - aws lambda update-function-code --function-name lambda_s3_manual_deployment_function --zip-file fileb://lambda-package.zip
+      - echo "Waiting for Lambda update to complete"
+      - sleep 10
+      - echo "Updating Lambda function configuration"
       - aws lambda update-function-configuration --function-name lambda_s3_manual_deployment_function --handler lambda.handler
 artifacts:
   files:

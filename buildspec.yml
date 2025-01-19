@@ -8,7 +8,7 @@
         "lambda:UpdateFunctionCode",
         "lambda:UpdateFunctionConfiguration"
       ],
-      "Resource": "arn:aws:lambda:ap-southeast-1:522814732420:function:lambda_s3_manual_deployment_function"
+      "Resource": "*"
     }
   ]
 }
